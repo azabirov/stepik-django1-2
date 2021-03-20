@@ -27,7 +27,23 @@ def main_view(request):
 
 
 def departure_view(request, departure):
-    return render(request, "tours/departure.html")
+    tours = []
+    for number in data.tours:
+        if data.tours[number]['departure'] == departure:
+            tours.append(data.tours[number])
+            data.tours[number]['pricetofit'] = '{:,}'.format(data.tours[number]['price']).replace(',', ' ')
+        minprice = '{:,}'.format(min([int(data.tours[tour]['price']) for tour in data.tours if data.tours[tour]['departure'] == departure])).replace(',', ' ')
+        maxprice = '{:,}'.format(max([int(data.tours[tour]['price']) for tour in data.tours if data.tours[tour]['departure'] == departure])).replace(',', ' ')
+        minnights = '{:,}'.format(min([int(data.tours[tour]['nights']) for tour in data.tours if data.tours[tour]['departure'] == departure])).replace(',', ' ')
+        maxnights = '{:,}'.format(max([int(data.tours[tour]['nights']) for tour in data.tours if data.tours[tour]['departure'] == departure])).replace(',', ' ')
+    return render(request, "tours/departure.html", context = {
+        'departure':departure,
+        'tours':tours,
+        'minprice':minprice,
+        'maxprice':maxprice,
+        'minnights':minnights,
+        'maxnights':maxnights,
+    })
 
 
 def tour_view(request, tour_id):

@@ -3,12 +3,27 @@ from django.shortcuts import render
 from django.http import HttpResponseNotFound, HttpResponseServerError
 # Create your views here.
 from tours import data
-
-
+import random
 
 
 def main_view(request):
-    return render(request, "tours/index.html")
+    tours = []
+    tour_id_list = []
+    image_random = random.choice(["https://cdn.pixabay.com/photo/2016/03/27/07/32/light-1282314_1280.jpg",
+                                  "https://megapornpics.com/wp-content/uploads/2018/12/monica_rambe-8240.jpg",
+                                  ])
+    for tour_id in range(6):
+        while True:
+            tour_id = random.randint(1, len(data.tours))
+            if tour_id not in tour_id_list: break
+        tours_element = data.tours[tour_id]
+        tours_element['tourid'] = tour_id
+        tours.append(tours_element)
+        tour_id_list.append(tour_id)
+    return render(request, "tours/index.html", context = {
+        'tours':tours,
+        'image_random':image_random,
+    })
 
 
 def departure_view(request, departure):

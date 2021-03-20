@@ -29,7 +29,10 @@ def main_view(request):
 
 def departure_view(request, departure):
     tours = []
+    tour_id = 0
     for number in data.tours:
+        tour_id += 1
+        data.tours[number]['tour_id'] = str(tour_id)
         if data.tours[number]['departure'] == departure:
             tours.append(data.tours[number])
             data.tours[number]['pricetofit'] = '{:,}'.format(data.tours[number]['price']).replace(',', ' ')

@@ -11,6 +11,7 @@ def main_view(request):
     tour_id_list = []
     image_random = random.choice(["https://cdn.pixabay.com/photo/2016/03/27/07/32/light-1282314_1280.jpg",
                                   "https://megapornpics.com/wp-content/uploads/2018/12/monica_rambe-8240.jpg",
+                                  "https://kartinkinaden.ru/uploads/posts/2021-01/thumbs/1611933967_19-p-belie-foni-s-pushistimi-oblakami-28.jpg",
                                   ])
     for tour_id in range(6):
         while True:
